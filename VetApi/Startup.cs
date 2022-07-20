@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Reflection;
 using System.Text;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -13,6 +15,10 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using VetApi.Context;
 using VetApi.Mappings;
+using VetApi.Repository;
+using VetApi.Repository.Interfaces;
+using VetApi.Services;
+using VetApi.Services.Interfaces;
 
 namespace VetApi
 {
@@ -48,12 +54,12 @@ namespace VetApi
                 ServerVersion.AutoDetect(Configuration.GetConnectionString("DefaultConnection"))));
 
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "VetApi", Version = "v1" });
-            });
+            
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IAnimalServices, AnimalServices>();
 
-            services.AddIdentity<IdentityUser, IdentityRole>(opt => {
+            services.AddIdentity<IdentityUser, IdentityRole>(opt =>
+            {
                 opt.SignIn.RequireConfirmedEmail = true;
                 opt.ClaimsIdentity.UserIdClaimType = "UserID";
             })
@@ -76,6 +82,40 @@ namespace VetApi
                         Encoding.UTF8.GetBytes(Configuration["Jwt:Key"])),
                     ClockSkew = TimeSpan.Zero
                 });
+
+                services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "VetApi", Version = "v1" });
+
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "Header de autorização JWT usando o esquema Bearer. \r\n\r\nInforme 'Bearer'[espaço] e o seu token.\r\n\r\nExemplo> \'Bearer 12345asdcas'"
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id="Bearer"
+                            }
+                        },
+                        new string[] {}
+                    }
+                });
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -91,6 +131,10 @@ namespace VetApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
+
+            app.UseCors("EnableCORS");
 
             app.UseAuthorization();
 
