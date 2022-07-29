@@ -16,7 +16,7 @@ namespace VetApi.Context
         public DbSet<Address> Addresses { get; set; }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-
+        
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -104,6 +104,10 @@ namespace VetApi.Context
 
             modelBuilder.Entity<IdentityRole>().HasData(
                 new IdentityRole { Id = "regular123aosdm123bJASNd", Name = "regular", NormalizedName = "REGULAR" }
+            );
+
+            modelBuilder.Entity<IdentityRole>().HasData(
+                new IdentityRole { Id = "vet125sasD31asdADA516as2da6A", Name = "vet", NormalizedName = "VET" }
             );
 
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(

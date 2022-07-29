@@ -1,4 +1,8 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using VetApi.Context;
 using VetApi.Models;
@@ -19,6 +23,30 @@ namespace VetApi.Repository
                      .Skip(skip)
                      .Take(take)
                      .AsNoTracking();
+        }
+
+        public async Task<IEnumerable<Animal>> GetByTutorId(int id)
+        {
+            return await _context.Set<Animal>()
+                    .Include(a => a.Tutor)
+                    .Where(a => a.Tutor.Id == id)
+                    .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Animal>> GetByTutorSSN(object SSN)
+        {
+            return await _context.Set<Animal>()
+                    .Include(a => a.Tutor)
+                    .Where(a => a.Tutor.SSN == (string)SSN)
+                    .AsNoTracking()
+                    .ToListAsync();
+        }
+
+        public async Task<Animal> GetByIdWithTutor(Expression<Func<Animal, bool>> predicate)
+        {
+            return await _context.Set<Animal>()
+                            .Include(a => a.Tutor)
+                            .SingleOrDefaultAsync(predicate);
         }
     }
 }

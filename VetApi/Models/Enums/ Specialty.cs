@@ -1,9 +1,9 @@
 namespace VetApi.Models.Enums
 {
-    public enum  Specialty
+    public enum Specialty
     {
         surgeon, // Cirurgião
-        Anesthetist, // Anestesista
+        anesthetist, // Anestesista
         general, // Clinico Geral
         physiotherapist // Fisioterapeuta
     }

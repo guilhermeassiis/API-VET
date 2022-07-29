@@ -356,17 +356,17 @@ namespace VetApi.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "adminIDAPI00213554856Pqwus", "5561ac77-8718-4893-9b43-33f6701aeea5", "admin", "ADMIN" });
-
-            migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "regular123aosdm123bJASNd", "1bf21bb1-f75d-4680-abc8-5a7b29a5248b", "regular", "REGULAR" });
+                values: new object[,]
+                {
+                    { "adminIDAPI00213554856Pqwus", "4715c61d-53d7-49b7-bc83-33015a560a5f", "admin", "ADMIN" },
+                    { "regular123aosdm123bJASNd", "7f8543c8-46f7-4c65-ab06-2b24ee9c66ef", "regular", "REGULAR" },
+                    { "vet125sasD31asdADA516as2da6A", "a5a23698-2cb4-4a95-97d0-2a5b899f8f7f", "vet", "VET" }
+                });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "adminIDAPI00213554856Pqwus", 0, "c67e3481-1a38-4fbf-9b90-21c0330d760d", "admin@vet.com", true, false, null, "ADMIN@VET.COM", "ADMIN@VET.COM", "AQAAAAEAACcQAAAAELED7W5y8Dw7l4DfuxK41TCjMyesuxlqD+fguFc3zMXpQQUcO3IA59r2eTb1L39Ftw==", null, false, "097bc7f0-3c55-4baf-bbfc-e23fb75fa075", false, "admin@vet.com" });
+                values: new object[] { "adminIDAPI00213554856Pqwus", 0, "d44cc8bf-a9f0-4049-a8f5-40738245121b", "admin@vet.com", true, false, null, "ADMIN@VET.COM", "ADMIN@VET.COM", "AQAAAAEAACcQAAAAEABs8Ji4NHtc5o1UoaAwHn4S+5lskykr9LsjtEdVBZPsTTPSURPKrjLxvI39b+yKbA==", null, false, "384e9c26-0217-409b-8a89-85fdcb8dd575", false, "admin@vet.com" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

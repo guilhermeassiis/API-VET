@@ -11,5 +11,6 @@ namespace VetApi.Models
         public Sex Sex { get; set; }
         public string Species { get; set; } = "Canine";
         public Tutor Tutor { get; set; }
+        public string Breed { get; set; }
     }
 }

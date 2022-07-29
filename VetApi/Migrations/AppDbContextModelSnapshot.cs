@@ -46,16 +46,23 @@ namespace VetApi.Migrations
                         new
                         {
                             Id = "adminIDAPI00213554856Pqwus",
-                            ConcurrencyStamp = "5561ac77-8718-4893-9b43-33f6701aeea5",
+                            ConcurrencyStamp = "2143bc6d-63e5-4e22-8776-fcf23561626c",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "regular123aosdm123bJASNd",
-                            ConcurrencyStamp = "1bf21bb1-f75d-4680-abc8-5a7b29a5248b",
+                            ConcurrencyStamp = "0536ec61-7c21-476c-8020-d4bd54bc327b",
                             Name = "regular",
                             NormalizedName = "REGULAR"
+                        },
+                        new
+                        {
+                            Id = "vet125sasD31asdADA516as2da6A",
+                            ConcurrencyStamp = "4793ecc9-17fe-42b0-a506-508b9a9b39d6",
+                            Name = "vet",
+                            NormalizedName = "VET"
                         });
                 });
 
@@ -150,15 +157,15 @@ namespace VetApi.Migrations
                         {
                             Id = "adminIDAPI00213554856Pqwus",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c67e3481-1a38-4fbf-9b90-21c0330d760d",
+                            ConcurrencyStamp = "8f497b9c-72e7-42da-84b0-b6ee2f29aa3a",
                             Email = "admin@vet.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@VET.COM",
                             NormalizedUserName = "ADMIN@VET.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAELED7W5y8Dw7l4DfuxK41TCjMyesuxlqD+fguFc3zMXpQQUcO3IA59r2eTb1L39Ftw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGPjctjiOHXApeWseyQ5lmpAMAc8wELT3Y8F1AP3olvnmJwpmZEAvVTceexHZY6AUA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "097bc7f0-3c55-4baf-bbfc-e23fb75fa075",
+                            SecurityStamp = "ad061a8f-c746-40d3-a6a1-928353e100b1",
                             TwoFactorEnabled = false,
                             UserName = "admin@vet.com"
                         });
@@ -287,6 +294,9 @@ namespace VetApi.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<string>("Breed")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("IdentificationCode")
                         .HasMaxLength(20)

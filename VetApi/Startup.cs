@@ -57,6 +57,14 @@ namespace VetApi
             
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IAnimalServices, AnimalServices>();
+            services.AddScoped<IAddressServices, AddressServices>();
+            services.AddScoped<ITutorServices, TutorServices>();
+            services.AddScoped<IVeterinarianServices, VeterinarianServices>();
+            services.AddScoped<IDataServices, DataServices>();
+            services.AddScoped<IQueryServices, QueryServices>();
+            services.AddScoped<IUserServices, UserServices>();
+            services.AddScoped<IEmailServices, EmailServices>();
+            services.AddScoped<ITheDogAPI, TheDogAPI>();
 
             services.AddIdentity<IdentityUser, IdentityRole>(opt =>
             {
@@ -131,8 +139,6 @@ namespace VetApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
-            app.UseAuthentication();
 
             app.UseCors("EnableCORS");
 

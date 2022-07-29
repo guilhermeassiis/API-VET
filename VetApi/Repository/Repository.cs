@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -40,10 +41,27 @@ namespace VetApi.Repository
         {
             _context.Set<T>().Remove(entity);
         }
+
+        public void DeleteRange(IEnumerable<T> entitys)
+        {
+            _context.Set<T>().RemoveRange(entitys);
+        }
+
         public void Update(T entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
             _context.Set<T>().Update(entity);
+        }
+
+        public async Task<bool> Exist(Expression<Func<T, bool>> predicate)
+        {
+            List<T> data = await _context.Set<T>().Where(predicate).ToListAsync();
+            
+            if(data == null)
+            {
+                return false;
+            }
+            return data.Any();
         }
     }
 }
